@@ -1,1 +1,1 @@
-div{border:3px solid blue}div::after{content:"";display:block;clear:both}p{float:left;width:100px;height:100px;border:1px solid red}
+div{border:1px solid blue}p{border:1px solid pink}span{border:1px solid #222}

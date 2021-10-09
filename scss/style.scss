@@ -6,29 +6,30 @@ mixin은 모든 것을 담을 수 있음.
 css에서 자주 사용할 것 같은 코드들이 있다면
 mixin으로 만들어놓고 세팅해두면
 나중에 반복적으로 사용할 수 있음.
+
+또한 매개변수와 결합하여 사용함으로써
+마치 함수 구조처럼 인자를 받아서 
+해당 값을 속성값으로 부여하는 것도 가능함.
+
+이 때, 매개변수는 일반 변수와 마찬가지로 '$변수명' 이 구조로 쓰면 됨!
+게다가 이 매개변수는 여러 개 넣을수도 있음.
 */
 
-@mixin test {
-  width: 100px;
-  height: 100px;
-  border: 1px solid red;
-}
-
-// mixin을 이용해서 하위 floating 요소를 clear(해제)하는 방법 (float, clear 개념은 검색하면 나옴...)
-@mixin clear {
-  &::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
+@mixin border($color) {
+  // mixin은 마치 함수처럼 사용할 수 있기 때문에, 매개변수를 받고, 그 매개변수안의 값을 속성값으로 할당해주는 것도 가능함.
+  border: 1px solid $color;
 }
 
 div {
-  border: 3px solid blue;
-  @include clear; // mixin을 include 할 때 괄호는 생략해도 됨.
+  @include border(
+    blue
+  ); // 이렇게 다른 스타일시트에서 include할 때 원하는 값을 매개변수로 넣어주면 됨.
 }
 
 p {
-  float: left;
-  @include test();
+  @include border(pink);
+}
+
+span {
+  @include border(#222);
 }
