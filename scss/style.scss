@@ -15,21 +15,16 @@ mixin으로 만들어놓고 세팅해두면
 게다가 이 매개변수는 여러 개 넣을수도 있음.
 */
 
-@mixin border($color) {
-  // mixin은 마치 함수처럼 사용할 수 있기 때문에, 매개변수를 받고, 그 매개변수안의 값을 속성값으로 할당해주는 것도 가능함.
-  border: 1px solid $color;
+@mixin box($w, $h) {
+  // mixin에서는 여러 개의 매개변수를 전달받아서 속성값에 넣어줄 수 있음.
+  width: $w;
+  height: $h;
 }
 
 div {
-  @include border(
-    blue
-  ); // 이렇게 다른 스타일시트에서 include할 때 원하는 값을 매개변수로 넣어주면 됨.
-}
-
-p {
-  @include border(pink);
-}
-
-span {
-  @include border(#222);
+  @include box(
+    50px,
+    100px
+  ); // 매개변수 자리에 값을 넣어줄 때 단위(px이던 %던)도 반드시 써줘야 함.
+  border: 1px solid blue;
 }
