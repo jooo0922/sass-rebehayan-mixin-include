@@ -2,6 +2,10 @@
 variable이랑 비슷한 개념이긴 한데,
 변수는 하나의 값만 담는 것이라고 한다면
 mixin은 모든 것을 담을 수 있음.
+
+css에서 자주 사용할 것 같은 코드들이 있다면
+mixin으로 만들어놓고 세팅해두면
+나중에 반복적으로 사용할 수 있음.
 */
 
 @mixin test {
@@ -10,9 +14,21 @@ mixin은 모든 것을 담을 수 있음.
   border: 1px solid red;
 }
 
+// mixin을 이용해서 하위 floating 요소를 clear(해제)하는 방법 (float, clear 개념은 검색하면 나옴...)
+@mixin clear {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
 div {
-  // 이렇게 하면 위에서 정의한 test라는 이름의 mixin이 div의 스타일시트에 적용이 된 것임.
-  // 이런 식으로 css 값을 바로 넣어주지 않고, 미리 저장해 둔 값들을 불러오는 것이 mixin & include
-  // 반복되는 코드 옵션들을 써야 하는 상황이 생길 때 주로 사용함.
-  @include test;
+  border: 3px solid blue;
+  @include clear; // mixin을 include 할 때 괄호는 생략해도 됨.
+}
+
+p {
+  float: left;
+  @include test();
 }
